@@ -11,6 +11,15 @@ CLI usage examples:
 """
 import argparse
 import os
+# Workaround for macOS OpenMP duplicate-lib abort (exit code 134).
+# Setting this allows the process to continue when multiple OpenMP runtimes
+# are present (causes 'Initializing libomp.dylib, but found libomp.dylib already initialized').
+# This is a pragmatic workaround for development; for production prefer
+# ensuring a single OpenMP runtime (installing libomp via brew or using
+# consistent conda-forge builds).
+if os.environ.get("KMP_DUPLICATE_LIB_OK", "") != "TRUE":
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 from pathlib import Path
 from time import time
 
