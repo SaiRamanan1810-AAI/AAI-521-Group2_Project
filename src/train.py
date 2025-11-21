@@ -20,7 +20,14 @@ import os
 if os.environ.get("KMP_DUPLICATE_LIB_OK", "") != "TRUE":
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
+import sys
 from pathlib import Path
+
+# Ensure repository root is on sys.path so `import src.*` works when running
+# the script as `python src/train.py`.
+repo_root = Path(__file__).resolve().parents[1]
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 from time import time
 
 import torch
