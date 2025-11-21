@@ -13,7 +13,8 @@ import random
 import shutil
 from pathlib import Path
 from collections import defaultdict
-from PIL import Image
+from PIL import Image, ImageFile
+import shutil
 
 
 def set_seed(seed: int):
@@ -24,14 +25,37 @@ def create_dir(path: Path):
     path.mkdir(parents=True, exist_ok=True)
 
 
-def copy_and_resize(src: Path, dst: Path, size: int):
+def copy_and_resize(src: Path, dst: Path, size: int, bad_dir: Path = None) -> bool:
+    """Copy an image from `src` to `dst` resizing to (size,size).
+
+    Returns True on success, False on failure. On failure, if `bad_dir` is
+    provided the original file is copied there for inspection.
+    """
     create_dir(dst.parent)
     try:
         img = Image.open(src).convert("RGB")
         img = img.resize((size, size))
         img.save(dst)
+        return True
     except Exception as e:
-        print(f"Skipping {src}: {e}")
+        # Try a permissive re-open in case of truncated JPEGs
+        try:
+            ImageFile.LOAD_TRUNCATED_IMAGES = True
+            with Image.open(src) as img:
+                img = img.convert("RGB")
+                img = img.resize((size, size))
+                img.save(dst)
+                return True
+        except Exception:
+            print(f"Skipping {src}: {e}")
+            if bad_dir is not None:
+                try:
+                    bad_dst = Path(bad_dir) / src.parent.name / src.name
+                    create_dir(bad_dst.parent)
+                    shutil.copy2(src, bad_dst)
+                except Exception as e2:
+                    print(f"Failed to copy bad file {src} to {bad_dir}: {e2}")
+            return False
 
 
 def split_dataset(raw_dir: str, out_dir: str, img_size: int = 224, val_split: float = 0.1, test_split: float = 0.1, seed: int = 42):
@@ -49,6 +73,9 @@ def split_dataset(raw_dir: str, out_dir: str, img_size: int = 224, val_split: fl
             if img_path.suffix.lower() in [".jpg", ".jpeg", ".png"]:
                 mapping[cls].append(img_path)
 
+    bad_files = []
+    bad_dir_path = Path(out) / "bad_files"
+
     for cls, items in mapping.items():
         random.shuffle(items)
         n = len(items)
@@ -62,7 +89,18 @@ def split_dataset(raw_dir: str, out_dir: str, img_size: int = 224, val_split: fl
             for src_path in list_items:
                 rel = src_path.name
                 dst = out / subset / cls / rel
-                copy_and_resize(src_path, dst, img_size)
+                ok = copy_and_resize(src_path, dst, img_size, bad_dir=bad_dir_path)
+                if not ok:
+                    bad_files.append(str(src_path))
+
+    # Save list of bad files for inspection
+    if bad_files:
+        create_dir(out)
+        bad_list_file = out / "bad_files.txt"
+        with open(bad_list_file, "w") as f:
+            for p in bad_files:
+                f.write(p + "\n")
+        print(f"Found {len(bad_files)} unreadable files. See {bad_list_file} and {bad_dir_path}")
 
 
 def parse_args():
