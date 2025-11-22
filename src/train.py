@@ -43,7 +43,7 @@ from src.models.transfer import load_pretrained_model
 from src.visualize import plot_training, plot_confusion
 
 
-def train_epoch(model, loader, criterion, optimizer, device):
+def train_epoch(model, loader, criterion, optimizer, device, mixup_alpha: float = 0.0, cutmix_alpha: float = 0.0):
     model.train()
     running_loss = 0.0
     all_preds = []
@@ -52,8 +52,19 @@ def train_epoch(model, loader, criterion, optimizer, device):
         x = x.to(device)
         y = y.to(device)
         optimizer.zero_grad()
-        logits = model(x)
-        loss = criterion(logits, y)
+        if mixup_alpha and mixup_alpha > 0.0:
+            from src.utils import mixup_data
+            x_mix, y_a, y_b, lam = mixup_data(x, y, mixup_alpha)
+            logits = model(x_mix)
+            loss = lam * criterion(logits, y_a) + (1 - lam) * criterion(logits, y_b)
+        elif cutmix_alpha and cutmix_alpha > 0.0:
+            from src.utils import cutmix_data
+            x_mix, y_a, y_b, lam = cutmix_data(x, y, cutmix_alpha)
+            logits = model(x_mix)
+            loss = lam * criterion(logits, y_a) + (1 - lam) * criterion(logits, y_b)
+        else:
+            logits = model(x)
+            loss = criterion(logits, y)
         loss.backward()
         optimizer.step()
         running_loss += loss.item() * x.size(0)
@@ -86,10 +97,17 @@ def eval_epoch(model, loader, criterion, device):
     return avg_loss, acc, prec, recall, f1, all_targets, all_preds
 
 
-def get_loaders(data_dir, img_size, batch_size):
+def get_loaders(data_dir, img_size, batch_size, num_workers=4):
+    # Training augmentations: RandomResizedCrop, flips, color jitter, rotation,
+    # gaussian blur, perspective, and normalization.
     train_tf = transforms.Compose([
-        transforms.Resize((img_size, img_size)),
-        transforms.RandomHorizontalFlip(),
+        transforms.RandomResizedCrop(img_size, scale=(0.6, 1.0)),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomVerticalFlip(p=0.2),
+        transforms.RandomRotation(25),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
+        transforms.RandomApply([transforms.GaussianBlur(kernel_size=5)], p=0.3),
+        transforms.RandomPerspective(distortion_scale=0.5, p=0.3),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
@@ -103,9 +121,9 @@ def get_loaders(data_dir, img_size, batch_size):
     val_ds = datasets.ImageFolder(Path(data_dir) / "val", transform=val_tf)
     test_ds = datasets.ImageFolder(Path(data_dir) / "test", transform=val_tf)
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=4)
-    test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=4)
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return train_loader, val_loader, test_loader, train_ds.classes
 
 
@@ -120,6 +138,9 @@ def parse_args():
     p.add_argument("--lr", type=float, default=1e-3)
     p.add_argument("--out_dir", default=".")
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--num_workers", type=int, default=4, help="DataLoader workers")
+    p.add_argument("--mixup_alpha", type=float, default=0.0, help="MixUp alpha (0 disables)")
+    p.add_argument("--cutmix_alpha", type=float, default=0.0, help="CutMix alpha (0 disables)")
     return p.parse_args()
 
 
@@ -127,7 +148,7 @@ def main():
     args = parse_args()
     set_seed(args.seed)
     device = get_device()
-    train_loader, val_loader, test_loader, classes = get_loaders(args.data_dir, args.img_size, args.batch_size)
+    train_loader, val_loader, test_loader, classes = get_loaders(args.data_dir, args.img_size, args.batch_size, num_workers=args.num_workers)
     num_classes = len(classes)
 
     if args.mode == "baseline":
@@ -148,7 +169,7 @@ def main():
 
     for epoch in range(1, args.epochs + 1):
         t0 = time()
-        train_loss, train_acc = train_epoch(model, train_loader, criterion, optimizer, device)
+        train_loss, train_acc = train_epoch(model, train_loader, criterion, optimizer, device, mixup_alpha=args.mixup_alpha, cutmix_alpha=args.cutmix_alpha)
         val_loss, val_acc, prec, recall, f1, _, _ = eval_epoch(model, val_loader, criterion, device)
 
         history["train_loss"].append(train_loss)
