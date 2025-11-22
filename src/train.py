@@ -28,6 +28,7 @@ from pathlib import Path
 repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
+import random
 from time import time
 
 import torch
@@ -43,7 +44,17 @@ from src.models.transfer import load_pretrained_model
 from src.visualize import plot_training, plot_confusion
 
 
-def train_epoch(model, loader, criterion, optimizer, device, mixup_alpha: float = 0.0, cutmix_alpha: float = 0.0):
+def train_epoch(
+    model,
+    loader,
+    criterion,
+    optimizer,
+    device,
+    mixup_alpha: float = 0.0,
+    cutmix_alpha: float = 0.0,
+    mixup_prob: float = 1.0,
+    cutmix_prob: float = 1.0,
+):
     model.train()
     running_loss = 0.0
     all_preds = []
@@ -52,16 +63,32 @@ def train_epoch(model, loader, criterion, optimizer, device, mixup_alpha: float 
         x = x.to(device)
         y = y.to(device)
         optimizer.zero_grad()
-        if mixup_alpha and mixup_alpha > 0.0:
+        applied = False
+        # Decide probabilistically whether to apply MixUp / CutMix for this batch
+        mix_flag = (mixup_alpha and mixup_alpha > 0.0) and (random.random() < mixup_prob)
+        cut_flag = (cutmix_alpha and cutmix_alpha > 0.0) and (random.random() < cutmix_prob)
+        # If both flags true, choose one at random
+        if mix_flag and cut_flag:
+            choice = random.choice(["mixup", "cutmix"])
+        elif mix_flag:
+            choice = "mixup"
+        elif cut_flag:
+            choice = "cutmix"
+        else:
+            choice = None
+
+        if choice == "mixup":
             from src.utils import mixup_data
             x_mix, y_a, y_b, lam = mixup_data(x, y, mixup_alpha)
             logits = model(x_mix)
             loss = lam * criterion(logits, y_a) + (1 - lam) * criterion(logits, y_b)
-        elif cutmix_alpha and cutmix_alpha > 0.0:
+            applied = True
+        elif choice == "cutmix":
             from src.utils import cutmix_data
             x_mix, y_a, y_b, lam = cutmix_data(x, y, cutmix_alpha)
             logits = model(x_mix)
             loss = lam * criterion(logits, y_a) + (1 - lam) * criterion(logits, y_b)
+            applied = True
         else:
             logits = model(x)
             loss = criterion(logits, y)
@@ -141,6 +168,8 @@ def parse_args():
     p.add_argument("--num_workers", type=int, default=4, help="DataLoader workers")
     p.add_argument("--mixup_alpha", type=float, default=0.0, help="MixUp alpha (0 disables)")
     p.add_argument("--cutmix_alpha", type=float, default=0.0, help="CutMix alpha (0 disables)")
+    p.add_argument("--mixup_prob", type=float, default=1.0, help="Probability of applying MixUp when enabled (0-1)")
+    p.add_argument("--cutmix_prob", type=float, default=1.0, help="Probability of applying CutMix when enabled (0-1)")
     return p.parse_args()
 
 
@@ -169,7 +198,17 @@ def main():
 
     for epoch in range(1, args.epochs + 1):
         t0 = time()
-        train_loss, train_acc = train_epoch(model, train_loader, criterion, optimizer, device, mixup_alpha=args.mixup_alpha, cutmix_alpha=args.cutmix_alpha)
+        train_loss, train_acc = train_epoch(
+            model,
+            train_loader,
+            criterion,
+            optimizer,
+            device,
+            mixup_alpha=args.mixup_alpha,
+            cutmix_alpha=args.cutmix_alpha,
+            mixup_prob=args.mixup_prob,
+            cutmix_prob=args.cutmix_prob,
+        )
         val_loss, val_acc, prec, recall, f1, _, _ = eval_epoch(model, val_loader, criterion, device)
 
         history["train_loss"].append(train_loss)
