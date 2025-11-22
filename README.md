@@ -1,6 +1,6 @@
 # Plant Pest Classification (CNN + Transfer Learning)
 
-Project scaffold for an image-based plant pest and disease classification system using PyTorch and Conda. This repository contains preprocessing, baseline CNN, transfer-learning scripts, visualization helpers, and documentation for a 3-person team working with branch/PR workflow.
+Project scaffold for an image-based plant pest and disease classification system using PyTorch and Conda. This repository contains preprocessing, baseline CNN, transfer-learning scripts, visualization helpers, and documentation for team working with branch/PR workflow.
 
 Quick start
 
