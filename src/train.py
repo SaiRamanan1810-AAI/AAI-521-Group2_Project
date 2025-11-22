@@ -87,16 +87,20 @@ def eval_epoch(model, loader, criterion, device):
 
 
 def get_loaders(data_dir, img_size, batch_size, num_workers=4):
-    # Training augmentations: RandomResizedCrop, flips, color jitter, rotation,
-    # gaussian blur, perspective, and normalization.
+    # Training augmentations: apply exactly one random augmentation per image
+    # (or none) so the same image receives different transforms each epoch.
+    single_augments = [
+        transforms.RandomHorizontalFlip(p=1.0),
+        transforms.RandomVerticalFlip(p=1.0),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
+        transforms.RandomRotation(25),
+        transforms.RandomApply([transforms.GaussianBlur(kernel_size=5)], p=1.0),
+        transforms.Lambda(lambda x: x),  # identity (no-op)
+    ]
+
     train_tf = transforms.Compose([
         transforms.RandomResizedCrop(img_size, scale=(0.6, 1.0)),
-        transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomVerticalFlip(p=0.2),
-        transforms.RandomRotation(25),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
-        transforms.RandomApply([transforms.GaussianBlur(kernel_size=5)], p=0.3),
-        transforms.RandomPerspective(distortion_scale=0.5, p=0.3),
+        transforms.RandomChoice(single_augments),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
