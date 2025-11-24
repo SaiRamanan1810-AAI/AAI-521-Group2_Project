@@ -35,7 +35,9 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import transforms, datasets
 from torch.utils.data import DataLoader
+from torch.utils.data import WeightedRandomSampler
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from collections import Counter
 
 from src.utils import set_seed, get_device, save_checkpoint, save_json
 from src.models.baseline import SimpleCNN
@@ -90,7 +92,7 @@ def eval_epoch(model, loader, criterion, device):
     return avg_loss, acc, prec, recall, f1, all_targets, all_preds
 
 
-def get_loaders(data_dir, img_size, batch_size, num_workers=4):
+def get_loaders(data_dir, img_size, batch_size, num_workers=4, oversample=False):
     # Training augmentations: apply exactly one random augmentation per image
     # (or none) so the same image receives different transforms each epoch.
     single_augments = [
@@ -123,10 +125,17 @@ def get_loaders(data_dir, img_size, batch_size, num_workers=4):
     val_ds = datasets.ImageFolder(Path(data_dir) / "val", transform=val_tf)
     test_ds = datasets.ImageFolder(Path(data_dir) / "test", transform=val_tf)
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    if oversample:
+        # Build per-sample weights inversely proportional to class frequency
+        counts = Counter([s[1] for s in train_ds.samples])
+        sample_weights = [1.0 / counts[s[1]] for s in train_ds.samples]
+        sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights), replacement=True)
+        train_loader = DataLoader(train_ds, batch_size=batch_size, sampler=sampler, num_workers=num_workers)
+    else:
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
-    return train_loader, val_loader, test_loader, train_ds.classes
+    return train_loader, val_loader, test_loader, train_ds, train_ds.classes
 
 
 def parse_args():
@@ -141,6 +150,8 @@ def parse_args():
     p.add_argument("--out_dir", default=".")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--num_workers", type=int, default=4, help="DataLoader workers")
+    p.add_argument("--oversample", action="store_true", help="Use WeightedRandomSampler to oversample minority classes during training")
+    p.add_argument("--class_weighting", choices=["none", "balanced"], default="none", help="Apply class weights to the loss (balanced = inverse-frequency)")
     return p.parse_args()
 
 
@@ -148,7 +159,9 @@ def main():
     args = parse_args()
     set_seed(args.seed)
     device = get_device()
-    train_loader, val_loader, test_loader, classes = get_loaders(args.data_dir, args.img_size, args.batch_size, num_workers=args.num_workers)
+    train_loader, val_loader, test_loader, train_ds, classes = get_loaders(
+        args.data_dir, args.img_size, args.batch_size, num_workers=args.num_workers, oversample=args.oversample
+    )
     num_classes = len(classes)
 
     if args.mode == "baseline":
@@ -157,7 +170,16 @@ def main():
         model = load_pretrained_model(args.model_name, num_classes=num_classes, pretrained=True, freeze_backbone=False)
 
     model = model.to(device)
-    criterion = nn.CrossEntropyLoss()
+    # Optionally apply class weighting based on train set inverse frequency
+    if args.class_weighting == "balanced":
+        counts = Counter([s[1] for s in train_ds.samples])
+        total = sum(counts.values())
+        # weight = total / (num_classes * count_i) -> sum(weights) ~= num_classes
+        weights = [total / (num_classes * counts.get(i, 1)) for i in range(num_classes)]
+        class_weights = torch.tensor(weights, dtype=torch.float)
+        criterion = nn.CrossEntropyLoss(weight=class_weights.to(device))
+    else:
+        criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr)
 
     history = {"train_loss": [], "val_loss": [], "train_acc": [], "val_acc": []}
