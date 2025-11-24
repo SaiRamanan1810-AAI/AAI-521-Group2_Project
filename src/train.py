@@ -43,6 +43,10 @@ from src.models.transfer import load_pretrained_model
 from src.visualize import plot_training, plot_confusion
 
 
+def _identity(x):
+    return x
+
+
 def train_epoch(model, loader, criterion, optimizer, device):
     model.train()
     running_loss = 0.0
@@ -90,17 +94,22 @@ def get_loaders(data_dir, img_size, batch_size, num_workers=4):
     # Training augmentations: apply exactly one random augmentation per image
     # (or none) so the same image receives different transforms each epoch.
     single_augments = [
+        transforms.RandomResizedCrop(img_size, scale=(0.8, 1.0), ratio=(3.0/4.0, 4.0/3.0)),
         transforms.RandomHorizontalFlip(p=1.0),
         transforms.RandomVerticalFlip(p=1.0),
         transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
         transforms.RandomRotation(25),
         transforms.RandomApply([transforms.GaussianBlur(kernel_size=5)], p=1.0),
-        transforms.Lambda(lambda x: x),  # identity (no-op)
+        transforms.Lambda(_identity),  # identity (no-op), top-level function is picklable
     ]
 
+    # Apply exactly one augmentation (or none) first, then ensure the image
+    # is resized to the target `img_size`. This avoids always running a
+    # RandomResizedCrop before the RandomChoice and lets RandomResizedCrop be
+    # one of the possible augmentations.
     train_tf = transforms.Compose([
-        transforms.RandomResizedCrop(img_size, scale=(0.6, 1.0)),
         transforms.RandomChoice(single_augments),
+        transforms.Resize((img_size, img_size)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
