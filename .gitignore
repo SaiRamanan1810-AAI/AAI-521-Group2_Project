@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environments
+env/
+venv/
+*.egg-info/
+.env
+
+# Data and models
+/data/
+/models/
+/reports/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Checkpoints
+*.ckpt
+*.pth
