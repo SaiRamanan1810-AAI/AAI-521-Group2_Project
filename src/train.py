@@ -40,7 +40,7 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 from collections import Counter
 
 from src.utils import set_seed, get_device, save_checkpoint, save_json
-from src.models.baseline import SimpleCNN
+from src.models.baseline import ResNetSmall
 from src.models.transfer import load_pretrained_model
 from src.visualize import plot_training, plot_confusion
 
@@ -165,7 +165,7 @@ def main():
     num_classes = len(classes)
 
     if args.mode == "baseline":
-        model = SimpleCNN(num_classes=num_classes)
+        model = ResNetSmall(num_classes=num_classes)
     else:
         model = load_pretrained_model(args.model_name, num_classes=num_classes, pretrained=True, freeze_backbone=False)
 
