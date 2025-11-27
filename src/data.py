@@ -26,7 +26,11 @@ def create_dir(path: Path):
 
 
 def copy_and_resize(src: Path, dst: Path, size: int, bad_dir: Path = None) -> bool:
-    """Copy an image from `src` to `dst` resizing to (size,size).
+    """Copy an image from `src` to `dst`, resizing so shortest side = 256, then center-crop to (size, size).
+
+    For non-square images:
+    1. Resize so shortest side = 256 (maintain aspect ratio)
+    2. Center-crop to (size, size)
 
     Returns True on success, False on failure. On failure, if `bad_dir` is
     provided the original file is copied there for inspection.
@@ -34,7 +38,24 @@ def copy_and_resize(src: Path, dst: Path, size: int, bad_dir: Path = None) -> bo
     create_dir(dst.parent)
     try:
         img = Image.open(src).convert("RGB")
-        img = img.resize((size, size))
+        
+        # Resize so shortest side = 256
+        w, h = img.size
+        if w < h:
+            new_w = 256
+            new_h = int(256 * h / w)
+        else:
+            new_h = 256
+            new_w = int(256 * w / h)
+        img = img.resize((new_w, new_h), Image.LANCZOS)
+        
+        # Center-crop to (size, size)
+        left = (new_w - size) // 2
+        top = (new_h - size) // 2
+        right = left + size
+        bottom = top + size
+        img = img.crop((left, top, right, bottom))
+        
         img.save(dst)
         return True
     except Exception as e:
@@ -43,7 +64,24 @@ def copy_and_resize(src: Path, dst: Path, size: int, bad_dir: Path = None) -> bo
             ImageFile.LOAD_TRUNCATED_IMAGES = True
             with Image.open(src) as img:
                 img = img.convert("RGB")
-                img = img.resize((size, size))
+                
+                # Resize so shortest side = 256
+                w, h = img.size
+                if w < h:
+                    new_w = 256
+                    new_h = int(256 * h / w)
+                else:
+                    new_h = 256
+                    new_w = int(256 * w / h)
+                img = img.resize((new_w, new_h), Image.LANCZOS)
+                
+                # Center-crop to (size, size)
+                left = (new_w - size) // 2
+                top = (new_h - size) // 2
+                right = left + size
+                bottom = top + size
+                img = img.crop((left, top, right, bottom))
+                
                 img.save(dst)
                 return True
         except Exception:
