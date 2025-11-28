@@ -1,157 +1,170 @@
-"""Data preprocessing utilities.
-
-This script creates `train/`, `val/`, and `test/` splits from a raw directory
-that follows ImageFolder class structure: `raw/<class_name>/*.jpg`.
-
-Usage example:
-
-    python src/data.py --raw_dir data/raw --out_dir data/processed --img_size 224
-
-"""
-import argparse
+import os
 import random
-import shutil
-from pathlib import Path
-from collections import defaultdict
-from PIL import Image, ImageFile
-import shutil
+from typing import List, Tuple, Dict, Optional
+
+from PIL import Image
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from torch.utils.data import Dataset
+import torch
+from torchvision import transforms
 
 
-def set_seed(seed: int):
-    random.seed(seed)
+def list_images(directory: str, exts=('.jpg', '.jpeg', '.png')):
+    paths = []
+    for root, _, files in os.walk(directory):
+        for f in files:
+            if f.lower().endswith(exts):
+                paths.append(os.path.join(root, f))
+    return paths
 
 
-def create_dir(path: Path):
-    path.mkdir(parents=True, exist_ok=True)
+class SimpleImageDataset(Dataset):
+    def __init__(self, samples: List[Tuple[str, int]], transform=None, transform_map: Optional[Dict[int, transforms.Compose]] = None):
+        """samples: list of (path, label)
+        transform: default transform applied when label not in transform_map
+        transform_map: optional dict mapping label -> transform to apply for that class
+        """
+        self.samples = samples
+        self.transform = transform
+        self.transform_map = transform_map or {}
 
+    def __len__(self):
+        return len(self.samples)
 
-def copy_and_resize(src: Path, dst: Path, size: int, bad_dir: Path = None) -> bool:
-    """Copy an image from `src` to `dst`, resizing so shortest side = 256, then center-crop to (size, size).
-
-    For non-square images:
-    1. Resize so shortest side = 256 (maintain aspect ratio)
-    2. Center-crop to (size, size)
-
-    Returns True on success, False on failure. On failure, if `bad_dir` is
-    provided the original file is copied there for inspection.
-    """
-    create_dir(dst.parent)
-    try:
-        img = Image.open(src).convert("RGB")
-        
-        # Resize so shortest side = 256
-        w, h = img.size
-        if w < h:
-            new_w = 256
-            new_h = int(256 * h / w)
-        else:
-            new_h = 256
-            new_w = int(256 * w / h)
-        img = img.resize((new_w, new_h), Image.LANCZOS)
-        
-        # Center-crop to (size, size)
-        left = (new_w - size) // 2
-        top = (new_h - size) // 2
-        right = left + size
-        bottom = top + size
-        img = img.crop((left, top, right, bottom))
-        
-        img.save(dst)
-        return True
-    except Exception as e:
-        # Try a permissive re-open in case of truncated JPEGs
-        try:
-            ImageFile.LOAD_TRUNCATED_IMAGES = True
-            with Image.open(src) as img:
-                img = img.convert("RGB")
-                
-                # Resize so shortest side = 256
-                w, h = img.size
-                if w < h:
-                    new_w = 256
-                    new_h = int(256 * h / w)
+    def __getitem__(self, idx):
+        path, label = self.samples[idx]
+        # Try to load image; if broken, try another random sample with same label
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                img = Image.open(path).convert('RGB')
+                t = self.transform_map.get(label, self.transform)
+                if t:
+                    img = t(img)
+                return img, label, path
+            except (OSError, IOError) as e:
+                if attempt < max_retries - 1:
+                    # Find another sample with the same label and retry
+                    same_label_indices = [i for i, (_, l) in enumerate(self.samples) if l == label]
+                    if same_label_indices:
+                        idx = random.choice(same_label_indices)
+                        path, label = self.samples[idx]
+                    else:
+                        raise  # no fallback available
                 else:
-                    new_h = 256
-                    new_w = int(256 * w / h)
-                img = img.resize((new_w, new_h), Image.LANCZOS)
-                
-                # Center-crop to (size, size)
-                left = (new_w - size) // 2
-                top = (new_h - size) // 2
-                right = left + size
-                bottom = top + size
-                img = img.crop((left, top, right, bottom))
-                
-                img.save(dst)
-                return True
-        except Exception:
-            print(f"Skipping {src}: {e}")
-            if bad_dir is not None:
-                try:
-                    bad_dst = Path(bad_dir) / src.parent.name / src.name
-                    create_dir(bad_dst.parent)
-                    shutil.copy2(src, bad_dst)
-                except Exception as e2:
-                    print(f"Failed to copy bad file {src} to {bad_dir}: {e2}")
-            return False
+                    # Last attempt: return a black image as fallback
+                    print(f'Warning: Could not load image at {path} after {max_retries} attempts. Using black image.')
+                    img = Image.new('RGB', (224, 224), (0, 0, 0))
+                    t = self.transform_map.get(label, self.transform)
+                    if t:
+                        img = t(img)
+                    return img, label, path
 
 
-def split_dataset(raw_dir: str, out_dir: str, img_size: int = 224, val_split: float = 0.1, test_split: float = 0.1, seed: int = 42):
-    raw = Path(raw_dir)
-    out = Path(out_dir)
-    set_seed(seed)
-
-    classes = [p.name for p in raw.iterdir() if p.is_dir()]
-    if not classes:
-        raise ValueError(f"No class subfolders found in {raw}")
-
-    mapping = defaultdict(list)
-    for cls in classes:
-        for img_path in (raw / cls).glob("**/*"):
-            if img_path.suffix.lower() in [".jpg", ".jpeg", ".png"]:
-                mapping[cls].append(img_path)
-
-    bad_files = []
-    bad_dir_path = Path(out) / "bad_files"
-
-    for cls, items in mapping.items():
-        random.shuffle(items)
-        n = len(items)
-        n_test = max(1, int(n * test_split))
-        n_val = max(1, int(n * val_split))
-        test_items = items[:n_test]
-        val_items = items[n_test:n_test + n_val]
-        train_items = items[n_test + n_val:]
-
-        for subset, list_items in [("train", train_items), ("val", val_items), ("test", test_items)]:
-            for src_path in list_items:
-                rel = src_path.name
-                dst = out / subset / cls / rel
-                ok = copy_and_resize(src_path, dst, img_size, bad_dir=bad_dir_path)
-                if not ok:
-                    bad_files.append(str(src_path))
-
-    # Save list of bad files for inspection
-    if bad_files:
-        create_dir(out)
-        bad_list_file = out / "bad_files.txt"
-        with open(bad_list_file, "w") as f:
-            for p in bad_files:
-                f.write(p + "\n")
-        print(f"Found {len(bad_files)} unreadable files. See {bad_list_file} and {bad_dir_path}")
+def make_weighted_sampler(samples: List[Tuple[str, int]]):
+    """Create a torch.utils.data.WeightedRandomSampler to oversample minority classes.
+    Returns sampler and class_weights (inverse frequency normalized) as torch tensor.
+    """
+    import torch
+    labels = [lab for _, lab in samples]
+    classes, counts = np.unique(labels, return_counts=True)
+    # weight for class = 1 / count
+    class_weights = {c: 1.0 / cnt for c, cnt in zip(classes, counts)}
+    sample_weights = [class_weights[l] for l in labels]
+    sample_weights = torch.DoubleTensor(sample_weights)
+    sampler = torch.utils.data.WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights), replacement=True)
+    # return tensor of class weights for loss balancing
+    cw = np.array([class_weights.get(c, 0.0) for c in range(int(classes.max()) + 1)])
+    cw = cw / cw.sum() * len(cw)
+    return sampler, torch.tensor(cw, dtype=torch.float)
 
 
-def parse_args():
-    p = argparse.ArgumentParser()
-    p.add_argument("--raw_dir", required=True, help="Raw dataset directory (class subfolders)")
-    p.add_argument("--out_dir", required=True, help="Output processed directory")
-    p.add_argument("--img_size", type=int, default=224)
-    p.add_argument("--val_split", type=float, default=0.1)
-    p.add_argument("--test_split", type=float, default=0.1)
-    p.add_argument("--seed", type=int, default=42)
-    return p.parse_args()
+def make_stratified_split(paths: List[str], labels: List[int], test_size: float, seed: int = 42):
+    train_paths, test_paths, train_labels, test_labels = train_test_split(
+        paths, labels, test_size=test_size, stratify=labels, random_state=seed
+    )
+    return (train_paths, train_labels), (test_paths, test_labels)
 
 
-if __name__ == "__main__":
-    args = parse_args()
-    split_dataset(args.raw_dir, args.out_dir, args.img_size, args.val_split, args.test_split, args.seed)
+def prepare_plant_dataset(data_dir: str = 'data/plants', seed: int = 42):
+    # Expect data/plants/{SpeciesName}/*images*
+    species = sorted([d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))])
+    samples = []
+    labels = []
+    for idx, sp in enumerate(species):
+        folder = os.path.join(data_dir, sp)
+        imgs = list_images(folder)
+        for p in imgs:
+            samples.append(p)
+            labels.append(idx)
+
+    (train_p, train_l), (temp_p, temp_l) = make_stratified_split(samples, labels, test_size=0.3, seed=seed)
+    (val_p, val_l), (test_p, test_l) = make_stratified_split(temp_p, temp_l, test_size=0.5, seed=seed)
+
+    meta = {'species': species}
+
+    return {
+        'train': list(zip(train_p, train_l)),
+        'val': list(zip(val_p, val_l)),
+        'test': list(zip(test_p, test_l)),
+        'meta': meta,
+    }
+
+
+def prepare_disease_dataset(species_name: str, data_dir: str = 'data/diseases', seed: int = 42):
+    # Expect data/diseases/{SpeciesName}/{DiseaseClass}/*images*
+    base = os.path.join(data_dir, species_name)
+    if not os.path.isdir(base):
+        raise FileNotFoundError(f"Disease data for {species_name} not found at {base}")
+    classes = sorted([d for d in os.listdir(base) if os.path.isdir(os.path.join(base, d))])
+    samples = []
+    labels = []
+    for idx, cl in enumerate(classes):
+        folder = os.path.join(base, cl)
+        imgs = list_images(folder)
+        for p in imgs:
+            samples.append(p)
+            labels.append(idx)
+
+    if len(samples) == 0:
+        raise ValueError(f"No images found for species {species_name} in {base}")
+
+    (train_p, train_l), (temp_p, temp_l) = make_stratified_split(samples, labels, test_size=0.3, seed=seed)
+    (val_p, val_l), (test_p, test_l) = make_stratified_split(temp_p, temp_l, test_size=0.5, seed=seed)
+
+    return {
+        'train': list(zip(train_p, train_l)),
+        'val': list(zip(val_p, val_l)),
+        'test': list(zip(test_p, test_l)),
+        'meta': {'classes': classes},
+    }
+
+
+def get_transforms(task: str = 'plant'):
+    if task == 'plant':
+        return transforms.Compose([
+            transforms.RandomResizedCrop(224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
+            transforms.RandomHorizontalFlip(0.5),
+            transforms.RandomRotation(20),
+            transforms.ColorJitter(0.2, 0.2, 0.1, 0.05),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
+    else:
+        return transforms.Compose([
+            transforms.RandomResizedCrop(224, scale=(0.6, 1.0), ratio=(0.9, 1.1)),
+            transforms.RandomHorizontalFlip(0.5),
+            transforms.RandomVerticalFlip(0.2),
+            transforms.RandomApply([transforms.ColorJitter(0.3, 0.3, 0.2, 0.1)], p=0.5),
+            transforms.RandomRotation(25),
+            transforms.RandomPerspective(distortion_scale=0.2, p=0.3),
+            transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
+
+
+if __name__ == '__main__':
+    print('data.py module. Use functions from code.')

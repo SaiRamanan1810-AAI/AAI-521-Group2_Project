@@ -1,25 +1,17 @@
 name: plant-pest
 channels:
-  - pytorch
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
   - python=3.9
   - pip
-  - numpy
-  - pandas
-  - scikit-learn
-  - matplotlib
-  - seaborn
-  - pillow
-  - tqdm
-  - jupyter
-  - notebook
   - pip:
     - torch
     - torchvision
-    - timm
-    - albumentations
-    - opencv-python
-    - pytest
-    - tensorboard
+    - scikit-learn
+    - pandas
+    - numpy
+    - matplotlib
+    - seaborn
+    - tqdm
+    - pillow
