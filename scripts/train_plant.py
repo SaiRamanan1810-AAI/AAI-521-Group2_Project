@@ -25,11 +25,16 @@ def build_dataloaders(data_dir=None, splits_dir=None, batch_size=32, num_workers
         train_df = _pd.read_csv(os.path.join(splits_dir, 'plants_train.csv'))
         val_df = _pd.read_csv(os.path.join(splits_dir, 'plants_val.csv'))
         test_df = _pd.read_csv(os.path.join(splits_dir, 'plants_test.csv'))
+        
+        # Extract species names from data_dir (default to data/plants if not provided)
+        data_dir = data_dir or 'data/plants'
+        species = sorted([d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))])
+        
         ds = {
             'train': list(zip(train_df['path'].tolist(), train_df['label'].tolist())),
             'val': list(zip(val_df['path'].tolist(), val_df['label'].tolist())),
             'test': list(zip(test_df['path'].tolist(), test_df['label'].tolist())),
-            'meta': {}
+            'meta': {'species': species}
         }
     else:
         ds = prepare_plant_dataset(data_dir)

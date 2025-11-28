@@ -53,7 +53,7 @@ Notes:
 
 ## Setup
 
-Create the conda environment:
+### 1. Create the conda environment
 
 ```bash
 conda env create -f environment.yml
@@ -62,46 +62,71 @@ conda activate plant-pest
 
 Install a specific PyTorch build if needed following https://pytorch.org.
 
+### 2. Extract and organize dataset
+
+If you have the dataset in `data.zip`, run:
+
+```bash
+python scripts/setup_data.py
+```
+
+This will automatically extract and organize the data into the expected structure under `data/plants/` and `data/diseases/`.
+
+**Options:**
+- `--zip-path <path>` — specify a different zip file location (default: `data.zip`)
+- `--output-dir <dir>` — specify output directory (default: `data`)
+- `--force` — force re-extraction even if data directories exist
+
+The script will verify the structure and report species counts after extraction.
+
 ## Usage
 
 Use the CLI scripts below to run common tasks (examples):
 
 Run the pipeline in this order:
 
-1) Run EDA to inspect datasets and generate reports
+1) Extract dataset (if using data.zip)
+
+```bash
+python scripts/setup_data.py
+```
+
+2) Run EDA to inspect datasets and generate reports
 
 ```bash
 python scripts/run_eda.py --plants-data data/plants --diseases-data data/diseases --out-dir reports
 ```
 
-2) Prepare stratified splits (CSV + metadata)
+3) Prepare stratified splits (CSV + metadata)
 
 ```bash
 python scripts/prepare_splits.py --plants-data data/plants --diseases-data data/diseases --out-dir data_splits
 ```
 
-3) Train the Plant (Stage-1) Classifier using the prepared splits
+4) Train the Plant (Stage-1) Classifier using the prepared splits
 
 ```bash
 python scripts/train_plant.py --splits-dir data_splits --out-dir models --batch-size 32 --epochs-head 5 --epochs-ft 15 --device cpu
 ```
 
-4) Train Disease (Stage-2) Classifiers for each species using the prepared splits
+5) Train Disease (Stage-2) Classifiers for each species using the prepared splits
 
 ```bash
-python scripts/train_disease.py --species Cashew --splits-dir data_splits --out-dir models --device cuda:0
-python scripts/train_disease.py --species Cassava --splits-dir data_splits --out-dir models --device cuda:0
-python scripts/train_disease.py --species Maize --splits-dir data_splits --out-dir models --device cuda:0
-python scripts/train_disease.py --species Tomato --splits-dir data_splits --out-dir models --device cuda:0
+python scripts/train_disease.py --species Cashew --splits-dir data_splits --out-dir models --device cpu
+python scripts/train_disease.py --species Cassava --splits-dir data_splits --out-dir models --device cpu
+python scripts/train_disease.py --species Maize --splits-dir data_splits --out-dir models --device cpu
+python scripts/train_disease.py --species Tomato --splits-dir data_splits --out-dir models --device cpu
 ```
 
-5) Evaluate models (Stage-1 and Stage-2)
+6) Evaluate models (Stage-1 and Stage-2)
 
 ```bash
-python scripts/evaluate.py --plant-checkpoint models/plant_checkpoint.pth --models-dir models --plants-data data/plants --diseases-data data/diseases --out-dir reports
+python scripts/evaluate.py --plant-checkpoint models/plant_checkpoint.pth --models-dir models --plants-data data/plants --diseases-data data/diseases --out-dir reports --device cpu
 ```
 
-6) Run Unit Tests
+This will generate confusion matrices and confidence histograms for both stages in the `reports/` directory.
+
+7) Run Unit Tests
 
 ```bash
 python -m unittest discover tests

@@ -4,6 +4,9 @@ import sys
 import argparse
 import json
 
+# Fix macOS OpenMP conflict (conda environment issue)
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+
 # ensure project root is on path so `src` imports work when running scripts
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
