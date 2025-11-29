@@ -29,14 +29,26 @@ def build_dataloaders(species_name, data_dir=None, splits_dir=None, batch_size=3
         train_pairs = list(zip(train_df['path'].tolist(), train_df['label'].tolist()))
         val_pairs = list(zip(val_df['path'].tolist(), val_df['label'].tolist()))
         test_pairs = list(zip(test_df['path'].tolist(), test_df['label'].tolist()))
-        # derive classes from labels present in splits (assume 0..K-1)
-        all_labels = list(train_df['label'].tolist()) + list(val_df['label'].tolist()) + list(test_df['label'].tolist())
-        uniques = sorted(set(int(x) for x in all_labels))
+        
+        # Load actual class names from metadata JSON
+        meta_path = os.path.join(sp_dir, f'{species_name}_meta.json')
+        if os.path.exists(meta_path):
+            import json
+            with open(meta_path, 'r') as f:
+                meta = json.load(f)
+        else:
+            # Fallback: derive from data_dir if metadata not found
+            meta = {'classes': []}
+            if data_dir:
+                base = os.path.join(data_dir, species_name)
+                if os.path.isdir(base):
+                    meta['classes'] = sorted([d for d in os.listdir(base) if os.path.isdir(os.path.join(base, d))])
+        
         ds = {
             'train': train_pairs,
             'val': val_pairs,
             'test': test_pairs,
-            'meta': {'classes': [str(u) for u in uniques]}
+            'meta': meta
         }
     else:
         ds = prepare_disease_dataset(species_name, data_dir)
