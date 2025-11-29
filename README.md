@@ -109,6 +109,12 @@ python scripts/prepare_splits.py --plants-data data/plants --diseases-data data/
 python scripts/train_plant.py --splits-dir data_splits --out-dir models --batch-size 32 --epochs-head 5 --epochs-ft 15 --device cpu
 ```
 
+Training automatically generates:
+- Model checkpoint: `models/plant_checkpoint.pth`
+- Metadata: `models/plant_checkpoint.pth.meta.json`
+- Training history: `models/plant_history.json`
+- Training plot: `models/plant_training.png`
+
 5) Train Disease (Stage-2) Classifiers for each species using the prepared splits
 
 ```bash
@@ -117,6 +123,12 @@ python scripts/train_disease.py --species Cassava --splits-dir data_splits --out
 python scripts/train_disease.py --species Maize --splits-dir data_splits --out-dir models --device cpu
 python scripts/train_disease.py --species Tomato --splits-dir data_splits --out-dir models --device cpu
 ```
+
+Each training run automatically generates:
+- Model checkpoint: `models/{Species}_checkpoint.pth`
+- Metadata: `models/{Species}_checkpoint.pth.meta.json`
+- Training history: `models/{Species}_history.json`
+- Training plot: `models/{Species}_disease_training.png`
 
 6) Evaluate models (Stage-1 and Stage-2)
 
@@ -132,8 +144,19 @@ This will generate confusion matrices and confidence histograms for both stages 
 python -m unittest discover tests
 ```
 
+**Training Plots**
+
+To generate/regenerate training plots from existing history files:
+
+```bash
+python scripts/plot_training.py --models-dir models --out-dir models
+```
+
+This will generate plots for all models that have history JSON files.
+
 **Notes**
 - Checkpoints are saved to `models/` as `<name>_checkpoint.pth` and metadata is saved alongside as `<checkpoint>.meta.json` (contains class names and other metadata used by the `InferencePipeline`).
+- Training scripts automatically generate loss/accuracy plots and save them alongside checkpoints.
 - Evaluation outputs (plots) and EDA reports are written to `reports/` by default.
 
 ## Notes & Recommendations

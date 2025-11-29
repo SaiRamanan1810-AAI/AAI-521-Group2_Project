@@ -85,10 +85,14 @@ def main():
 
     device = torch.device(args.device)
     model = load_efficientnet_b0(num_classes=4, pretrained=True)
+    
+    # Set history path
+    history_path = os.path.join(args.out_dir, 'plant_history.json')
 
     model, history = train_two_step(model, dataloaders, device,
                                     epochs_head=args.epochs_head, epochs_finetune=args.epochs_ft,
-                                    checkpoint_path=ck_path, class_weights=class_weights, use_focal=False, mixup_alpha=0.2)
+                                    checkpoint_path=ck_path, class_weights=class_weights, 
+                                    use_focal=False, mixup_alpha=0.2, history_path=history_path)
 
     # Save metadata alongside checkpoint
     meta_path = ck_path + '.meta.json'
@@ -97,6 +101,31 @@ def main():
 
     print(f'Plant model saved to: {ck_path}')
     print(f'Metadata saved to: {meta_path}')
+    
+    # Generate training plot
+    print('\nGenerating training plot...')
+    import matplotlib.pyplot as plt
+    epochs = list(range(1, len(history['train_loss']) + 1))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+    ax1.plot(epochs, history['train_loss'], 'b-', label='Train Loss', linewidth=2)
+    ax1.plot(epochs, history['val_loss'], 'r-', label='Val Loss', linewidth=2)
+    ax1.set_xlabel('Epoch', fontsize=12)
+    ax1.set_ylabel('Loss', fontsize=12)
+    ax1.set_title('Plant Species Classifier - Loss', fontsize=14, fontweight='bold')
+    ax1.legend(fontsize=10)
+    ax1.grid(True, alpha=0.3)
+    ax2.plot(epochs, history['train_acc'], 'b-', label='Train Accuracy', linewidth=2)
+    ax2.plot(epochs, history['val_acc'], 'r-', label='Val Accuracy', linewidth=2)
+    ax2.set_xlabel('Epoch', fontsize=12)
+    ax2.set_ylabel('Accuracy', fontsize=12)
+    ax2.set_title('Plant Species Classifier - Accuracy', fontsize=14, fontweight='bold')
+    ax2.legend(fontsize=10)
+    ax2.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plot_path = os.path.join(args.out_dir, 'plant_training.png')
+    plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f'Training plot saved to: {plot_path}')
 
 
 if __name__ == '__main__':

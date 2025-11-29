@@ -65,8 +65,12 @@ def evaluate(model, dataloader, device, criterion=None):
 def train_two_step(model, dataloaders: Dict[str, DataLoader], device: torch.device,
                    epochs_head=5, epochs_finetune=15, lr_head=1e-3, lr_ft=1e-4,
                    checkpoint_path='models/checkpoint.pth', class_weights=None,
-                   use_focal=False, focal_gamma=2.0, mixup_alpha=0.0):
+                   use_focal=False, focal_gamma=2.0, mixup_alpha=0.0, history_path=None):
     os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
+    
+    # Default history path based on checkpoint name if not provided
+    if history_path is None:
+        history_path = os.path.join(os.path.dirname(checkpoint_path), 'history.json')
 
     # Step A: freeze encoder, train head
     set_parameter_requires_grad(model, True)
@@ -199,8 +203,9 @@ def train_two_step(model, dataloaders: Dict[str, DataLoader], device: torch.devi
                 break
 
     # Save history
-    with open(os.path.join(os.path.dirname(checkpoint_path), 'history.json'), 'w') as f:
+    with open(history_path, 'w') as f:
         json.dump(history, f)
+    print(f'Training history saved to: {history_path}')
 
     # load best
     ck = torch.load(checkpoint_path, map_location=device)
