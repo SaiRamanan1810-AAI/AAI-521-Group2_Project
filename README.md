@@ -91,11 +91,37 @@ Run the pipeline in this order:
 python scripts/setup_data.py
 ```
 
-2) Run EDA to inspect datasets and generate reports
+2) Run comprehensive EDA to inspect datasets and generate reports
 
 ```bash
-python scripts/run_eda.py --plants-data data/plants --diseases-data data/diseases --out-dir reports
+python scripts/run_eda.py --data-root data --out-dir reports
 ```
+
+To automatically remove duplicate images (optional):
+```bash
+python scripts/run_eda.py --data-root data --out-dir reports --remove-duplicates
+```
+
+The comprehensive EDA includes:
+- **Class count summary** — Distribution of samples across all classes
+- **Class balance analysis** — Visual charts showing imbalance metrics
+- **Duplicate detection** — Identify duplicate images using file hashes
+- **Duplicate removal** — Automatically remove duplicates, keeping first occurrence (optional with `--remove-duplicates`)
+- **Corrupted image detection** — Find and quarantine unreadable images
+- **Dimension analysis** — Width, height, and aspect ratio statistics with visualizations
+- **Imbalance summary** — Imbalance ratios and coefficient of variation for each class
+- **HTML report export** — Interactive HTML report with all findings and embedded visualizations
+
+Generated outputs:
+- `reports/eda_report.html` — Comprehensive interactive report with all visualizations embedded
+- `reports/plant_class_balance.png` — Plant species distribution
+- `reports/{Species}_disease_class_balance.png` — Disease distribution per species
+- `reports/data_samples.png` — Sample grid of plant images with labels
+- `reports/{Species}_disease_samples.png` — Sample grids of disease images per species
+- `reports/dimension_analysis.png` — Image dimension statistics and distributions
+- `data/bad_images/` — Directory containing corrupted images (if any found)
+- `data/dup_images/` — Directory containing duplicate images (if `--remove-duplicates` used)
+- `data/dup_images/duplicates_log.txt` — Log of all moved duplicate files
 
 3) Prepare stratified splits (CSV + metadata)
 
