@@ -164,7 +164,66 @@ python scripts/evaluate.py --plant-checkpoint models/plant_checkpoint.pth --mode
 
 This will generate confusion matrices and confidence histograms for both stages in the `reports/` directory.
 
-7) Run Unit Tests
+7) Run Inference on new images
+
+**Single image prediction:**
+```bash
+python scripts/run_inference.py --image path/to/image.jpg --device cpu
+```
+
+**Multiple images:**
+```bash
+python scripts/run_inference.py --image img1.jpg img2.jpg img3.jpg --output predictions.json --device cpu
+```
+
+**Directory of images:**
+```bash
+python scripts/run_inference.py --image-dir path/to/images --output results.json --device cpu
+```
+
+**Quiet mode (minimal output):**
+```bash
+python scripts/run_inference.py --image-dir data/plants/Tomato --output tomato_results.json --device cpu --quiet
+```
+
+**Available Options:**
+- `--image` — One or more image file paths
+- `--image-dir` — Directory containing images to process
+- `--plant-checkpoint` — Path to plant model checkpoint (default: `models/plant_checkpoint.pth`)
+- `--models-dir` — Directory containing disease model checkpoints (default: `models`)
+- `--device` — Device to use: `cpu`, `cuda`, or `mps` (default: `cpu`)
+- `--threshold` — Confidence threshold for disease routing (default: `0.5`)
+- `--output` / `-o` — Save predictions to JSON file
+- `--quiet` / `-q` — Suppress verbose output, only show summary
+
+**The Two-Stage Inference Pipeline:**
+1. **Stage 1 (Plant Classification):** Predicts plant species from {Cashew, Cassava, Maize, Tomato}
+2. **Stage 2 (Disease Classification):** Routes to species-specific disease classifier
+3. **Output Format:** Returns predictions with confidence scores for both stages
+4. **Human-Readable Results:** Uses actual species and disease names from metadata
+
+**Output Format (JSON):**
+```json
+{
+  "image.jpg": {
+    "plant_species": "Tomato",
+    "plant_confidence": 0.98,
+    "disease": "leaf blight",
+    "disease_confidence": 0.92,
+    "above_threshold": true
+  }
+}
+```
+
+**Example Output (Console):**
+```
+Image: tomato_leaf.jpg
+  Plant Species: Tomato (confidence: 0.98)
+  Disease: leaf blight (confidence: 0.92)
+  Status: ✓ Above threshold
+```
+
+8) Run Unit Tests
 
 ```bash
 python -m unittest discover tests

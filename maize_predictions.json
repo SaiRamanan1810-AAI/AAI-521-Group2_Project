@@ -1,0 +1,1634 @@
+[
+  {
+    "image": "healthy108_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5912",
+    "note": ""
+  },
+  {
+    "image": "healthy56_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9761",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8913",
+    "note": ""
+  },
+  {
+    "image": "healthy40_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9981",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6512",
+    "note": ""
+  },
+  {
+    "image": "healthy149_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9960",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7402",
+    "note": ""
+  },
+  {
+    "image": "healthy17_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9982",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6364",
+    "note": ""
+  },
+  {
+    "image": "healthy132_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9994",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8642",
+    "note": ""
+  },
+  {
+    "image": "healthy83_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7976",
+    "note": ""
+  },
+  {
+    "image": "healthy165_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9846",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.6421",
+    "note": ""
+  },
+  {
+    "image": "healthy173_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9926",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.4947",
+    "note": ""
+  },
+  {
+    "image": "healthy124_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8953",
+    "note": ""
+  },
+  {
+    "image": "healthy95_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9981",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8901",
+    "note": ""
+  },
+  {
+    "image": "healthy153_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9141",
+    "note": ""
+  },
+  {
+    "image": "healthy104_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9956",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7889",
+    "note": ""
+  },
+  {
+    "image": "healthy112_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9962",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7192",
+    "note": ""
+  },
+  {
+    "image": "healthy145_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7714",
+    "note": ""
+  },
+  {
+    "image": "healthy60_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9450",
+    "note": ""
+  },
+  {
+    "image": "healthy37_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9977",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8450",
+    "note": ""
+  },
+  {
+    "image": "healthy169_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9979",
+    "disease_class": "streak virus",
+    "disease_confidence": "0.5131",
+    "note": ""
+  },
+  {
+    "image": "healthy186_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9981",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8380",
+    "note": ""
+  },
+  {
+    "image": "healthy21_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9967",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5168",
+    "note": ""
+  },
+  {
+    "image": "healthy7_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7703",
+    "note": ""
+  },
+  {
+    "image": "healthy190_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7854",
+    "note": ""
+  },
+  {
+    "image": "healthy76_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9993",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8895",
+    "note": ""
+  },
+  {
+    "image": "healthy201_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9974",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9689",
+    "note": ""
+  },
+  {
+    "image": "healthy99_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7066",
+    "note": ""
+  },
+  {
+    "image": "healthy128_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8348",
+    "note": ""
+  },
+  {
+    "image": "healthy129_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9967",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8990",
+    "note": ""
+  },
+  {
+    "image": "healthy77_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6678",
+    "note": ""
+  },
+  {
+    "image": "healthy200_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7950",
+    "note": ""
+  },
+  {
+    "image": "healthy98_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9995",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.4814",
+    "note": ""
+  },
+  {
+    "image": "healthy6_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9987",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6097",
+    "note": ""
+  },
+  {
+    "image": "healthy191_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9972",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7542",
+    "note": ""
+  },
+  {
+    "image": "healthy20_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7540",
+    "note": ""
+  },
+  {
+    "image": "healthy168_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9289",
+    "note": ""
+  },
+  {
+    "image": "healthy187_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "1.0000",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7073",
+    "note": ""
+  },
+  {
+    "image": "healthy36_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9808",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7624",
+    "note": ""
+  },
+  {
+    "image": "healthy61_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9932",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8205",
+    "note": ""
+  },
+  {
+    "image": "healthy144_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9984",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7144",
+    "note": ""
+  },
+  {
+    "image": "healthy113_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7889",
+    "note": ""
+  },
+  {
+    "image": "healthy105_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7958",
+    "note": ""
+  },
+  {
+    "image": "healthy152_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9963",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9091",
+    "note": ""
+  },
+  {
+    "image": "healthy94_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9966",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7205",
+    "note": ""
+  },
+  {
+    "image": "healthy125_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6529",
+    "note": ""
+  },
+  {
+    "image": "healthy172_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9821",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7582",
+    "note": ""
+  },
+  {
+    "image": "healthy164_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9934",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8172",
+    "note": ""
+  },
+  {
+    "image": "healthy82_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9990",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8404",
+    "note": ""
+  },
+  {
+    "image": "healthy133_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9982",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8058",
+    "note": ""
+  },
+  {
+    "image": "healthy16_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9971",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.7067",
+    "note": ""
+  },
+  {
+    "image": "healthy148_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9994",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8422",
+    "note": ""
+  },
+  {
+    "image": "healthy41_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9988",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8719",
+    "note": ""
+  },
+  {
+    "image": "healthy57_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9954",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9258",
+    "note": ""
+  },
+  {
+    "image": "healthy109_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9966",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6202",
+    "note": ""
+  },
+  {
+    "image": "healthy155_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8282",
+    "note": ""
+  },
+  {
+    "image": "healthy102_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9729",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6331",
+    "note": ""
+  },
+  {
+    "image": "healthy114_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9930",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7058",
+    "note": ""
+  },
+  {
+    "image": "healthy143_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8662",
+    "note": ""
+  },
+  {
+    "image": "healthy66_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6713",
+    "note": ""
+  },
+  {
+    "image": "healthy89_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9971",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9382",
+    "note": ""
+  },
+  {
+    "image": "healthy138_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8428",
+    "note": ""
+  },
+  {
+    "image": "healthy31_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9939",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5960",
+    "note": ""
+  },
+  {
+    "image": "healthy180_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9985",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4833",
+    "note": ""
+  },
+  {
+    "image": "healthy27_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6911",
+    "note": ""
+  },
+  {
+    "image": "healthy179_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9909",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8020",
+    "note": ""
+  },
+  {
+    "image": "healthy196_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9948",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8495",
+    "note": ""
+  },
+  {
+    "image": "healthy70_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9990",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5284",
+    "note": ""
+  },
+  {
+    "image": "healthy207_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9813",
+    "disease_class": "leaf spot",
+    "disease_confidence": "0.4603",
+    "note": ""
+  },
+  {
+    "image": "healthy159_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7409",
+    "note": ""
+  },
+  {
+    "image": "healthy50_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9990",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9374",
+    "note": ""
+  },
+  {
+    "image": "healthy118_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9942",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8067",
+    "note": ""
+  },
+  {
+    "image": "healthy46_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9947",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5999",
+    "note": ""
+  },
+  {
+    "image": "healthy11_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9757",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8217",
+    "note": ""
+  },
+  {
+    "image": "healthy134_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8011",
+    "note": ""
+  },
+  {
+    "image": "healthy85_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9992",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4174",
+    "note": ""
+  },
+  {
+    "image": "healthy163_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9800",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7365",
+    "note": ""
+  },
+  {
+    "image": "healthy175_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9981",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7727",
+    "note": ""
+  },
+  {
+    "image": "healthy122_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9990",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5947",
+    "note": ""
+  },
+  {
+    "image": "healthy93_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9953",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8710",
+    "note": ""
+  },
+  {
+    "image": "healthy92_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9981",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8578",
+    "note": ""
+  },
+  {
+    "image": "healthy123_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7827",
+    "note": ""
+  },
+  {
+    "image": "healthy174_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7405",
+    "note": ""
+  },
+  {
+    "image": "healthy162_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9959",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8559",
+    "note": ""
+  },
+  {
+    "image": "healthy84_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "1.0000",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7030",
+    "note": ""
+  },
+  {
+    "image": "healthy135_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8288",
+    "note": ""
+  },
+  {
+    "image": "healthy10_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9962",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7367",
+    "note": ""
+  },
+  {
+    "image": "healthy47_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9989",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7347",
+    "note": ""
+  },
+  {
+    "image": "healthy119_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7702",
+    "note": ""
+  },
+  {
+    "image": "healthy51_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9977",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8743",
+    "note": ""
+  },
+  {
+    "image": "healthy158_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9903",
+    "disease_class": "streak virus",
+    "disease_confidence": "0.6784",
+    "note": ""
+  },
+  {
+    "image": "healthy71_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9938",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7309",
+    "note": ""
+  },
+  {
+    "image": "healthy206_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9951",
+    "disease_class": "leaf spot",
+    "disease_confidence": "0.5815",
+    "note": ""
+  },
+  {
+    "image": "healthy178_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9168",
+    "note": ""
+  },
+  {
+    "image": "healthy197_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7924",
+    "note": ""
+  },
+  {
+    "image": "healthy26_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5934",
+    "note": ""
+  },
+  {
+    "image": "healthy181_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5507",
+    "note": ""
+  },
+  {
+    "image": "healthy30_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9935",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6869",
+    "note": ""
+  },
+  {
+    "image": "healthy139_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8823",
+    "note": ""
+  },
+  {
+    "image": "healthy67_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9957",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6674",
+    "note": ""
+  },
+  {
+    "image": "healthy142_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7237",
+    "note": ""
+  },
+  {
+    "image": "healthy115_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9852",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5645",
+    "note": ""
+  },
+  {
+    "image": "healthy103_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9968",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8301",
+    "note": ""
+  },
+  {
+    "image": "healthy154_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9971",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8308",
+    "note": ""
+  },
+  {
+    "image": "healthy205_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9980",
+    "disease_class": "leaf spot",
+    "disease_confidence": "0.5077",
+    "note": ""
+  },
+  {
+    "image": "healthy72_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6024",
+    "note": ""
+  },
+  {
+    "image": "healthy194_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9293",
+    "disease_class": "streak virus",
+    "disease_confidence": "0.6315",
+    "note": ""
+  },
+  {
+    "image": "healthy3_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9804",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7929",
+    "note": ""
+  },
+  {
+    "image": "healthy25_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9994",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6441",
+    "note": ""
+  },
+  {
+    "image": "healthy182_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9987",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5772",
+    "note": ""
+  },
+  {
+    "image": "healthy33_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5851",
+    "note": ""
+  },
+  {
+    "image": "healthy64_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9970",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8126",
+    "note": ""
+  },
+  {
+    "image": "healthy141_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7579",
+    "note": ""
+  },
+  {
+    "image": "healthy116_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9993",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7320",
+    "note": ""
+  },
+  {
+    "image": "healthy48_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9901",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6365",
+    "note": ""
+  },
+  {
+    "image": "healthy100_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9983",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8904",
+    "note": ""
+  },
+  {
+    "image": "healthy157_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9978",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8283",
+    "note": ""
+  },
+  {
+    "image": "healthy91_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9578",
+    "note": ""
+  },
+  {
+    "image": "healthy209_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9889",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8723",
+    "note": ""
+  },
+  {
+    "image": "healthy120_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9965",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8913",
+    "note": ""
+  },
+  {
+    "image": "healthy29_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9875",
+    "disease_class": "leaf spot",
+    "disease_confidence": "0.4601",
+    "note": ""
+  },
+  {
+    "image": "healthy198_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6784",
+    "note": ""
+  },
+  {
+    "image": "healthy177_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9969",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9561",
+    "note": ""
+  },
+  {
+    "image": "healthy161_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9930",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7597",
+    "note": ""
+  },
+  {
+    "image": "healthy68_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9918",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9382",
+    "note": ""
+  },
+  {
+    "image": "healthy136_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "1.0000",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7242",
+    "note": ""
+  },
+  {
+    "image": "healthy13_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7652",
+    "note": ""
+  },
+  {
+    "image": "healthy44_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9858",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8717",
+    "note": ""
+  },
+  {
+    "image": "healthy52_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9975",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6591",
+    "note": ""
+  },
+  {
+    "image": "healthy53_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9994",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7331",
+    "note": ""
+  },
+  {
+    "image": "healthy45_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9977",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9051",
+    "note": ""
+  },
+  {
+    "image": "healthy12_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9977",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8586",
+    "note": ""
+  },
+  {
+    "image": "healthy137_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9992",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8588",
+    "note": ""
+  },
+  {
+    "image": "healthy86_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9979",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4820",
+    "note": ""
+  },
+  {
+    "image": "healthy69_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9856",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7952",
+    "note": ""
+  },
+  {
+    "image": "healthy160_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9992",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8787",
+    "note": ""
+  },
+  {
+    "image": "healthy199_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9924",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7886",
+    "note": ""
+  },
+  {
+    "image": "healthy176_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5005",
+    "note": ""
+  },
+  {
+    "image": "healthy28_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9977",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9282",
+    "note": ""
+  },
+  {
+    "image": "healthy121_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9979",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6348",
+    "note": ""
+  },
+  {
+    "image": "healthy90_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6215",
+    "note": ""
+  },
+  {
+    "image": "healthy208_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9925",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.5326",
+    "note": ""
+  },
+  {
+    "image": "healthy156_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9965",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7706",
+    "note": ""
+  },
+  {
+    "image": "healthy101_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9985",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6627",
+    "note": ""
+  },
+  {
+    "image": "healthy49_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9978",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7379",
+    "note": ""
+  },
+  {
+    "image": "healthy117_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9899",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.3647",
+    "note": ""
+  },
+  {
+    "image": "healthy140_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9973",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6274",
+    "note": ""
+  },
+  {
+    "image": "healthy65_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9198",
+    "note": ""
+  },
+  {
+    "image": "healthy32_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9947",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9583",
+    "note": ""
+  },
+  {
+    "image": "healthy183_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "1.0000",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8884",
+    "note": ""
+  },
+  {
+    "image": "healthy24_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9978",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8475",
+    "note": ""
+  },
+  {
+    "image": "healthy195_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9259",
+    "note": ""
+  },
+  {
+    "image": "healthy2_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9861",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7886",
+    "note": ""
+  },
+  {
+    "image": "healthy204_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9849",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8000",
+    "note": ""
+  },
+  {
+    "image": "healthy73_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9999",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7950",
+    "note": ""
+  },
+  {
+    "image": "healthy97_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9952",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7876",
+    "note": ""
+  },
+  {
+    "image": "healthy78_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9988",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8246",
+    "note": ""
+  },
+  {
+    "image": "healthy126_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7035",
+    "note": ""
+  },
+  {
+    "image": "healthy9_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9992",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8073",
+    "note": ""
+  },
+  {
+    "image": "healthy171_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9992",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8743",
+    "note": ""
+  },
+  {
+    "image": "healthy39_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9990",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9617",
+    "note": ""
+  },
+  {
+    "image": "healthy188_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "1.0000",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9163",
+    "note": ""
+  },
+  {
+    "image": "healthy167_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9987",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8505",
+    "note": ""
+  },
+  {
+    "image": "healthy81_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9987",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5967",
+    "note": ""
+  },
+  {
+    "image": "healthy130_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9652",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5425",
+    "note": ""
+  },
+  {
+    "image": "healthy15_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9893",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5407",
+    "note": ""
+  },
+  {
+    "image": "healthy42_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9959",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7774",
+    "note": ""
+  },
+  {
+    "image": "healthy54_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9995",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6765",
+    "note": ""
+  },
+  {
+    "image": "healthy203_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9986",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7306",
+    "note": ""
+  },
+  {
+    "image": "healthy74_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9948",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9039",
+    "note": ""
+  },
+  {
+    "image": "healthy192_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4910",
+    "note": ""
+  },
+  {
+    "image": "healthy5_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9988",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7815",
+    "note": ""
+  },
+  {
+    "image": "healthy23_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8667",
+    "note": ""
+  },
+  {
+    "image": "healthy184_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9979",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8817",
+    "note": ""
+  },
+  {
+    "image": "healthy35_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9972",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6689",
+    "note": ""
+  },
+  {
+    "image": "healthy62_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9975",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9061",
+    "note": ""
+  },
+  {
+    "image": "healthy147_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9968",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9515",
+    "note": ""
+  },
+  {
+    "image": "healthy19_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9967",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7281",
+    "note": ""
+  },
+  {
+    "image": "healthy110_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9988",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8427",
+    "note": ""
+  },
+  {
+    "image": "healthy106_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9994",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6645",
+    "note": ""
+  },
+  {
+    "image": "healthy58_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9969",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5196",
+    "note": ""
+  },
+  {
+    "image": "healthy151_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8634",
+    "note": ""
+  },
+  {
+    "image": "healthy150_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9972",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6820",
+    "note": ""
+  },
+  {
+    "image": "healthy59_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9993",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8331",
+    "note": ""
+  },
+  {
+    "image": "healthy107_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9991",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9429",
+    "note": ""
+  },
+  {
+    "image": "healthy111_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9980",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8002",
+    "note": ""
+  },
+  {
+    "image": "healthy146_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9907",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9656",
+    "note": ""
+  },
+  {
+    "image": "healthy63_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9910",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8502",
+    "note": ""
+  },
+  {
+    "image": "healthy34_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7996",
+    "note": ""
+  },
+  {
+    "image": "healthy185_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9982",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8314",
+    "note": ""
+  },
+  {
+    "image": "healthy22_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9984",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5321",
+    "note": ""
+  },
+  {
+    "image": "healthy193_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9976",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7369",
+    "note": ""
+  },
+  {
+    "image": "healthy4_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9995",
+    "disease_class": "Unknown (3)",
+    "disease_confidence": "0.5048",
+    "note": ""
+  },
+  {
+    "image": "healthy202_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9996",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9129",
+    "note": ""
+  },
+  {
+    "image": "healthy75_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9978",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6536",
+    "note": ""
+  },
+  {
+    "image": "healthy55_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9845",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7850",
+    "note": ""
+  },
+  {
+    "image": "healthy43_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9906",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.8112",
+    "note": ""
+  },
+  {
+    "image": "healthy14_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9922",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7839",
+    "note": ""
+  },
+  {
+    "image": "healthy131_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9228",
+    "note": ""
+  },
+  {
+    "image": "healthy80_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9954",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4505",
+    "note": ""
+  },
+  {
+    "image": "healthy166_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9993",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6098",
+    "note": ""
+  },
+  {
+    "image": "healthy38_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9913",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.6242",
+    "note": ""
+  },
+  {
+    "image": "healthy8_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9998",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7808",
+    "note": ""
+  },
+  {
+    "image": "healthy170_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9949",
+    "disease_class": "streak virus",
+    "disease_confidence": "0.3453",
+    "note": ""
+  },
+  {
+    "image": "healthy127_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9997",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7538",
+    "note": ""
+  },
+  {
+    "image": "healthy96_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9970",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.9177",
+    "note": ""
+  },
+  {
+    "image": "healthy79_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.9995",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.4932",
+    "note": ""
+  }
+]
