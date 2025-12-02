@@ -166,6 +166,38 @@ This will generate confusion matrices and confidence histograms for both stages 
 
 7) Run Inference on new images
 
+**Option A: Interactive Web App (Streamlit) - Recommended**
+
+Launch the web application:
+```bash
+streamlit run app.py
+```
+
+Or use the quick start script:
+```bash
+./run_app.sh
+```
+
+The web app provides:
+- 🖼️ **Interactive Image Upload** — Drag & drop or browse to upload images
+- 🎯 **Real-Time Classification** — Instant two-stage disease detection
+- 📊 **Visual Confidence Scores** — Progress bars and color-coded results
+- ⚙️ **Adjustable Threshold** — Fine-tune confidence requirements via sidebar
+- 💾 **Downloadable Results** — Export predictions as JSON
+- 📱 **Responsive Design** — Works on desktop, tablet, and mobile
+- 🎨 **Clean Interface** — User-friendly with clear visual feedback
+- 📈 **Detailed Summary** — Complete breakdown of both classification stages
+
+**Features:**
+- Configurable model paths and device selection (CPU/CUDA/MPS)
+- Color-coded confidence indicators (green > 80%, yellow > 60%, red < 60%)
+- Two-stage pipeline visualization with species and disease detection
+- Threshold-based filtering for reliable predictions
+- Summary table with all classification metrics
+- Download button for JSON export of results
+
+**Option B: Command-Line Interface**
+
 **Single image prediction:**
 ```bash
 python scripts/run_inference.py --image path/to/image.jpg --device cpu
