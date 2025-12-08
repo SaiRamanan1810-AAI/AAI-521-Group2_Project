@@ -162,7 +162,25 @@ Each training run automatically generates:
 python scripts/evaluate.py --plant-checkpoint models/plant_checkpoint.pth --models-dir models --plants-data data/plants --diseases-data data/diseases --out-dir reports --device cpu
 ```
 
-This will generate confusion matrices and confidence histograms for both stages in the `reports/` directory.
+The evaluation generates comprehensive metrics and visualizations for both stages:
+
+**Metrics Calculated:**
+- **Accuracy** — Overall correct predictions
+- **Precision** — Macro-averaged (treats all classes equally) and weighted (accounts for class imbalance)
+- **Recall** — Macro-averaged and weighted
+- **F1-Score** — Macro-averaged and weighted
+- **Per-Class Metrics** — Precision, recall, and F1 for each individual class
+
+**Outputs Generated:**
+- `reports/stage1_metrics.json` — Plant classifier metrics in JSON format
+- `reports/stage1_confusion_matrix.png` — Plant species confusion matrix
+- `reports/stage1_confidence_hist.png` — Plant prediction confidence distribution
+- `reports/stage2_{Species}_metrics.json` — Disease classifier metrics per species
+- `reports/stage2_{Species}_confmat.png` — Disease confusion matrices per species
+- `reports/stage2_{Species}_conf_hist.png` — Disease confidence distributions per species
+- `reports/stage2_all_species_metrics.json` — Combined metrics for all disease classifiers
+
+Metrics are displayed in console with formatted tables and saved to JSON files for further analysis.
 
 7) Run Inference on new images
 
@@ -179,14 +197,14 @@ Or use the quick start script:
 ```
 
 The web app provides:
-- 🖼️ **Interactive Image Upload** — Drag & drop or browse to upload images
-- 🎯 **Real-Time Classification** — Instant two-stage disease detection
-- 📊 **Visual Confidence Scores** — Progress bars and color-coded results
-- ⚙️ **Adjustable Threshold** — Fine-tune confidence requirements via sidebar
-- 💾 **Downloadable Results** — Export predictions as JSON
-- 📱 **Responsive Design** — Works on desktop, tablet, and mobile
-- 🎨 **Clean Interface** — User-friendly with clear visual feedback
-- 📈 **Detailed Summary** — Complete breakdown of both classification stages
+- **Interactive Image Upload** — Drag & drop or browse to upload images
+- **Real-Time Classification** — Instant two-stage disease detection
+- **Visual Confidence Scores** — Progress bars and color-coded results
+- **Adjustable Threshold** — Fine-tune confidence requirements via sidebar
+- **Downloadable Results** — Export predictions as JSON
+- **Responsive Design** — Works on desktop, tablet, and mobile
+- **Clean Interface** — User-friendly with clear visual feedback
+- **Detailed Summary** — Complete breakdown of both classification stages
 
 **Features:**
 - Configurable model paths and device selection (CPU/CUDA/MPS)
