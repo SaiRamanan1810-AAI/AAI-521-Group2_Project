@@ -1,3 +1,13 @@
-"""Source package for plant-pest project."""
+"""src package for multi-crop-disease-classifier.
 
-__all__ = ["data", "models", "train", "utils", "visualize"]
+Making `src` an explicit package so CLI scripts can import as `from src import ...`.
+"""
+
+__all__ = [
+    "data",
+    "model",
+    "train",
+    "inference",
+    "eda",
+    "visualize",
+]

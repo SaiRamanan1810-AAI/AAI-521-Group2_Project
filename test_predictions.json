@@ -1,0 +1,26 @@
+[
+  {
+    "image": "healthy276_.jpg",
+    "plant_species": "Tomato",
+    "plant_confidence": "0.9970",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.7197",
+    "note": ""
+  },
+  {
+    "image": "red rust628_.jpg",
+    "plant_species": "Cashew",
+    "plant_confidence": "0.6720",
+    "disease_class": "red rust",
+    "disease_confidence": "0.8078",
+    "note": ""
+  },
+  {
+    "image": "mosaic987_.jpg",
+    "plant_species": "Maize",
+    "plant_confidence": "0.6952",
+    "disease_class": "leaf blight",
+    "disease_confidence": "0.5592",
+    "note": ""
+  }
+]
